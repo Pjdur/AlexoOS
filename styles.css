@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#desktop {
+    width: 100vw;
+    height: 100vh;
+    background-color: #87ceeb;
+    display: flex;
+    flex-direction: column;
+}
+
+#taskbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+#apps {
+    flex-grow: 1;
+    position: relative;
+}
+
+.app {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+}
