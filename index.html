@@ -8,10 +8,6 @@
 </head>
 <body>
     <div id="desktop">
-        <div id="taskbar">
-            <button onclick="openApp('calculator')">Calculator</button>
-            <button onclick="openApp('textEditor')">Text Editor</button>
-        </div>
         <div id="apps">
             <!-- Calculator App -->
             <div id="calculator" class="app">
@@ -51,6 +47,13 @@
                 <button onclick="saveText()">Save</button>
                 <button onclick="closeApp('textEditor')">Close</button>
             </div>
+        </div>
+        <div id="taskbar">
+            <div id="taskbar-buttons">
+                <button onclick="openApp('calculator')">Calculator</button>
+                <button onclick="openApp('textEditor')">Text Editor</button>
+            </div>
+            <div id="clock"></div>
         </div>
     </div>
     <script src="scripts.js"></script>
