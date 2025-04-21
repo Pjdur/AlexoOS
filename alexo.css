@@ -10,12 +10,6 @@
     --font-family: 'Arial', sans-serif;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%; /* Ensure the body takes up the full height */
-}
-
 #desktop {
     width: 100vw;
     height: 100vh;
@@ -27,7 +21,7 @@ html, body {
     padding: 0;
 }
 
-#taskbar {
+#taskbar-buttons {
     display: flex;
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
@@ -36,11 +30,17 @@ html, body {
     width: 100%;
     background-color: rgb(158, 222, 219);
     padding: 10px;
-}
-
-#taskbar-buttons {
     display: flex;
     gap: 10px;
+}
+
+#clock {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgb(158, 222, 219);
+    padding: 5px;
+    border-radius: var(--border-radius);
 }
 
 body {
