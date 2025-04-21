@@ -3,7 +3,10 @@ function openApp(appId) {
 }
 
 function closeApp(appId) {
-    document.getElementById(appId).style.display = 'none';
+    const appElement = document.getElementById(appId);
+    if (appElement) {
+        appElement.style.display = 'none';
+    }
 }
 
 // Clock Function
