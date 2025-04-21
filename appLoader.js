@@ -27,9 +27,16 @@ function openApp(app) {
                 const appsContainer = document.getElementById('apps');
                 const appDiv = document.createElement('div');
                 appDiv.id = app.id;
-                appDiv.className = 'app';
-                appDiv.style.display = 'none'; // Do not show the app when loaded
-                appDiv.innerHTML = html;
+
+                // Attach Shadow DOM
+                const shadowRoot = appDiv.attachShadow({ mode: 'open' });
+
+                // Add styles and HTML to Shadow DOM
+                shadowRoot.innerHTML = `
+                    <link rel="stylesheet" href="./built-in/app.css">
+                    ${html}
+                `;
+
                 appsContainer.appendChild(appDiv);
             })
             .catch(error => console.error(`Failed to load app: ${app.name}`, error));
