@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlexoOS Setup</title>
+    <link rel="stylesheet" href="alexo.css">
+    <style>
+        .setup-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .setup-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-preview {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .theme-option {
+            width: 30%;
+            height: 50px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .taskbar-apps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .taskbar-app {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+
+        .taskbar-app.selected {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <div class="setup-header">
+            <h1>Welcome to AlexoOS!</h1>
+            <p>Let's set up your environment to get started.</p>
+        </div>
+
+        <!-- Theme Selection -->
+        <div class="setup-section">
+            <h2>Choose a Theme</h2>
+            <div class="theme-preview">
+                <div class="theme-option" style="background-color: #4CAF50;" onclick="selectTheme('#4CAF50')"></div>
+                <div class="theme-option" style="background-color: #333;" onclick="selectTheme('#333')"></div>
+                <div class="theme-option" style="background-color: #87CEEB;" onclick="selectTheme('#87CEEB')"></div>
+            </div>
+        </div>
+
+        <!-- Taskbar Apps Selection -->
+        <div class="setup-section">
+            <h2>Choose Taskbar Apps</h2>
+            <div class="taskbar-apps">
+                <div class="taskbar-app" onclick="toggleTaskbarApp(this, 'Browser')">Browser</div>
+                <div class="taskbar-app" onclick="toggleTaskbarApp(this, 'Music Player')">Music Player</div>
+            </div>
+        </div>
+        <!-- Finish Setup -->
+        <div class="setup-section">
+            <button onclick="finishSetup()">Finish Setup</button>
+        </div>
+    </div>
+    <script>
+        let selectedTheme = '#4CAF50';
+        let selectedApps = [];
+
+        function selectTheme(color) {
+            selectedTheme = color;
+            document.body.style.backgroundColor = color;
+        }
+
+        function toggleTaskbarApp(element, appName) {
+            element.classList.toggle('selected');
+            if (element.classList.contains('selected')) {
+                selectedApps.push(appName);
+            } else {
+                selectedApps = selectedApps.filter(app => app !== appName);
+            }
+        }
+
+        function finishSetup() {
+            // Save preferences to localStorage
+            localStorage.setItem('setupComplete', true);
+            localStorage.setItem('selectedTheme', selectedTheme);
+            localStorage.setItem('selectedApps', JSON.stringify(selectedApps));
+
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

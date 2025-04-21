@@ -4,58 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlexoOS</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="alexo.css">
+    <script>
+        // Check if setup is complete
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('setupComplete')) {
+                window.location.href = 'setup.html';
+            } else {
+                applyUserPreferences();
+            }
+        });
+
+        function applyUserPreferences() {
+            // Apply theme
+            const theme = localStorage.getItem('selectedTheme');
+            if (theme) {
+                document.body.style.backgroundColor = theme;
+            }
+
+            // Load taskbar apps
+            const apps = JSON.parse(localStorage.getItem('selectedApps') || '[]');
+            const taskbarButtons = document.getElementById('taskbar-buttons');
+            apps.forEach(app => {
+                const button = document.createElement('button');
+                button.textContent = app;
+                button.onclick = () => alert(`${app} launched!`);
+                taskbarButtons.appendChild(button);
+            });
+        }
+    </script>
 </head>
 <body>
     <div id="desktop">
-        <div id="apps">
-            <!-- Calculator App -->
-            <div id="calculator" class="app">
-                <h2>Calculator</h2>
-                <input type="text" id="calcDisplay" readonly>
-                <div>
-                    <button onclick="calcInput('7')">7</button>
-                    <button onclick="calcInput('8')">8</button>
-                    <button onclick="calcInput('9')">9</button>
-                    <button onclick="calcInput('/')">/</button>
-                </div>
-                <div>
-                    <button onclick="calcInput('4')">4</button>
-                    <button onclick="calcInput('5')">5</button>
-                    <button onclick="calcInput('6')">6</button>
-                    <button onclick="calcInput('*')">*</button>
-                </div>
-                <div>
-                    <button onclick="calcInput('1')">1</button>
-                    <button onclick="calcInput('2')">2</button>
-                    <button onclick="calcInput('3')">3</button>
-                    <button onclick="calcInput('-')">-</button>
-                </div>
-                <div>
-                    <button onclick="calcInput('0')">0</button>
-                    <button onclick="calcInput('.')">.</button>
-                    <button onclick="calculate()">=</button>
-                    <button onclick="calcInput('+')">+</button>
-                </div>
-                <button onclick="closeApp('calculator')">Close</button>
-            </div>
-            
-            <!-- Text Editor App -->
-            <div id="textEditor" class="app">
-                <h2>Text Editor</h2>
-                <textarea id="textArea" rows="10" cols="30"></textarea>
-                <button onclick="saveText()">Save</button>
-                <button onclick="closeApp('textEditor')">Close</button>
-            </div>
-        </div>
+        <div id="apps"></div>
         <div id="taskbar">
-            <div id="taskbar-buttons">
-                <button onclick="openApp('calculator')">Calculator</button>
-                <button onclick="openApp('textEditor')">Text Editor</button>
-            </div>
+            <div id="taskbar-buttons"></div>
             <div id="clock"></div>
         </div>
     </div>
     <script src="scripts.js"></script>
+    <script src="appLoader.js"></script>
 </body>
 </html>

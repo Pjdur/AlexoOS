@@ -1,0 +1,27 @@
+<div id="textEditor">
+    <div class="app-header">
+        <h2>Text Editor</h2>
+        <button onclick="closeApp('textEditor')">Close</button>
+    </div>
+    <div class="app-body">
+        <textarea id="editor" rows="20" cols="80"></textarea>
+        <button id="saveButton">Save</button>
+    </div>
+    <script>
+        // Initialize the text editor
+        function initializeTextEditor() {
+            const editor = document.getElementById('editor');
+            const saveButton = document.getElementById('saveButton');
+            const savedContent = localStorage.getItem('textEditorContent');
+            if (savedContent) {
+                editor.value = savedContent;
+            }
+            saveButton.addEventListener('click', () => {
+                const content = editor.value;
+                localStorage.setItem('textEditorContent', content);
+                alert('Content saved!');
+            });
+        }
+        document.addEventListener('DOMContentLoaded', initializeTextEditor);
+    </script>
+</div>
